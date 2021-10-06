@@ -1,19 +1,19 @@
 const { createAccessToken } = require("../../../middleware/createToken");
 const User = require("../../../models/user");
-const friendModel = require("../../../merge/friendMerge/friendModel");
+const contactModel = require("../../../merge/contactMerge/contactModel");
 
 
 exports.loginOrAddSchema = `
 
 type category_result {
     _id: String,
-    friends: [String!],
+    contacts: [String!],
 }
 
 type loginOrAdd_result {
     _id: String!,
     username: String!,
-    # friends:[friend_result!],
+    # contacts:[contact_result!],
     categories:[category_result!],
     recentSearch:[String!],
     accessToken: String!,
@@ -60,7 +60,7 @@ exports.loginOrAddResolver = {
                     ...fetchedUser._doc,
                     _id: fetchedUser.id,
                     accessToken: accessToken,
-                    friends: friendModel.friends.bind(this, fetchedUser._doc.friends),
+                    contacts: contactModel.contacts.bind(this, fetchedUser._doc.contacts),
                 };
 
             } catch (err) {

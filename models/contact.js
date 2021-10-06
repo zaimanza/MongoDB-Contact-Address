@@ -25,4 +25,4 @@ const modelDesign = new mongoose.Schema({
     },
 });
 
-module.exports = conn.dropgodb.model("Friend", modelDesign);
+module.exports = conn.dropgodb.model("Contact", modelDesign);

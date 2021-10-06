@@ -7,9 +7,9 @@ const category = new mongoose.Schema({
         type: String,
         required: true
     },
-    friends: [{
+    contacts: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Friend"
+        ref: "Contact"
     }],
 });
 
@@ -18,9 +18,9 @@ const modelDesign = new mongoose.Schema({
         type: String,
         required: true
     },
-    friends: [{
+    contacts: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Friend"
+        ref: "Contact"
     }],
     categories: [{
         type: category,
