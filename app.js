@@ -24,6 +24,12 @@ const {
     buildSchema
 } = require('graphql');
 
+const {
+    formatError
+} = require("./middleware/formatError");
+
+const errorName = formatError.errorName;
+
 const PORT = process.env.PORT || 4000;
 
 async function startApolloServer(typeDefs, resolvers) {
@@ -71,7 +77,11 @@ async function startApolloServer(typeDefs, resolvers) {
         }) => ({
             req,
             res,
+            errorName,
         }),
+        formatError: (err) => {
+            return formatError.getError(err);
+        },
     });
 
 
