@@ -34,7 +34,7 @@ const rootAuth = require("./middleware/rootAuth");
 
 const errorName = formatError.errorName;
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4001;
 
 async function startApolloServer(typeDefs, resolvers) {
     // Required logic for integrating with Express
@@ -131,7 +131,7 @@ async function startApolloServer(typeDefs, resolvers) {
     await new Promise(resolve => httpServer.listen({
         port: PORT
     }, resolve));
-    console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}graphql`);
+    console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}graphql`);
 }
 
 startApolloServer();
