@@ -1,0 +1,31 @@
+{
+  "name": "mongodb-contact-address",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zaimanza/MongoDB-Contact-Address.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zaimanza/MongoDB-Contact-Address/issues"
+  },
+  "homepage": "https://github.com/zaimanza/MongoDB-Contact-Address#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  },
+  "dependencies": {
+    "apollo-server-core": "^3.3.0",
+    "apollo-server-express": "^2.25.2",
+    "express": "^4.17.1",
+    "graphql": "^15.6.1",
+    "graphql-tools": "^8.2.0",
+    "http": "0.0.1-security",
+    "subscriptions-transport-ws": "^0.9.19"
+  }
+}

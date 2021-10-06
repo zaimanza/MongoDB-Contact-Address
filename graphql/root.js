@@ -1,0 +1,121 @@
+const {
+    gql,
+} = require('apollo-server-express');
+
+const {
+    pubsub,
+    withFilter,
+} = require('../middleware/pubsubs');
+
+const {
+    makeExecutableSchema
+} = require('@graphql-tools/schema');
+
+const {
+    userSchema,
+    userResolver,
+} = require('./userGQL/user-root');
+
+
+
+const channels = [{
+    id: 1,
+    name: 'soccer',
+}, {
+    id: 2,
+    name: 'baseball',
+}];
+
+let nextId = 3;
+
+const typeDefs = gql`
+type Query {
+   _empty: String 
+}
+
+type Mutation {
+    _empty: String 
+ } 
+ 
+ ${userSchema}
+# type Channel {
+#   id: ID!               
+#   name: String
+#   messages: [Message]!
+# }
+
+# type Message {
+#   id: ID!
+#   text: String
+# }
+# type Query {
+#   channels: [Channel]    
+#   channel(id: ID!): Channel
+# }
+
+# type Mutation {
+#   addChannel(name: String!): Channel
+# }
+
+# type Subscription {
+#   channelAdded(name:String!): Channel    # subscription operation.
+# }
+`;
+
+const resolvers = {
+    ...userResolver,
+    // Query: {
+    //     channels: () => {
+    //         return channels;
+    //     },
+    //     channel: (root, {
+    //         id
+    //     }) => {
+    //         return channels.find(channel => channel.id == id);
+    //     },
+    // },
+    // Mutation: {
+    //     addChannel: (root, args, context) => {
+    //         // console.log(args)
+    //         // console.log(context.req.isAuth);
+    //         const newChannel = {
+    //             id: nextId++,
+    //             name: args.name
+    //         };
+    //         channels.push(newChannel);
+    //         pubsub.publish('channelAdded', {
+    //             channelAdded: newChannel
+    //         }); // publish to a topic
+    //         return newChannel;
+    //     },
+    // },
+    // Subscription: {
+    //     channelAdded: {
+    //         resolve: (payload, args, context, info) => {
+    //             // Manipulate and return the new value
+    //             // console.log(context);
+    //             return payload.channelAdded;
+    //         },
+    //         subscribe: withFilter(
+    //             (q, qw, qwe, qwer) => {
+    //                 // console.log(qwer);
+    //                 return pubsub.asyncIterator('channelAdded');
+    //             },
+    //             (payload, variables) => {
+    //                 // console.log("new load");
+    //                 // console.log(payload.channelAdded.name);
+    //                 // console.log(variables.name);
+    //                 // Only push an update if the comment is on
+    //                 // the correct repository for this operation
+    //                 return payload.channelAdded.name == variables.name;
+    //             },
+    //         ),
+    //     },
+    // }
+};
+const schema = makeExecutableSchema({
+    typeDefs,
+    resolvers
+});
+
+exports.schema = schema;
