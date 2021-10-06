@@ -29,11 +29,14 @@
     "concurrently": "^6.3.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "easygraphql-format-error": "0.0.3",
     "express": "^4.17.1",
     "graphql": "^15.6.1",
     "graphql-tools": "^8.2.0",
     "http": "0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.9",
     "subscriptions-transport-ws": "^0.9.19"
   }
 }

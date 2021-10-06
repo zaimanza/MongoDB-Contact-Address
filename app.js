@@ -30,6 +30,7 @@ const {
 const {
     formatError
 } = require("./middleware/formatError");
+const rootAuth = require("./middleware/rootAuth");
 
 const errorName = formatError.errorName;
 
@@ -47,6 +48,8 @@ async function startApolloServer(typeDefs, resolvers) {
     app.use(bodyParser.json());
 
     app.use(cookieParser());
+
+    app.use(rootAuth);
 
     const httpServer = createServer(app);
 
