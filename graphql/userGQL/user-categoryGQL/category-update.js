@@ -1,7 +1,7 @@
 exports.categoryUpdateSchema = `
 
 extend type Mutation {
-    categoryAdd(
+    categoryUpdate(
         contactId: ID!,
     ): contact_result
 }
@@ -9,7 +9,7 @@ extend type Mutation {
 
 exports.categoryUpdateResolver = {
     Mutation: {
-        categoryAdd: async (root, {
+        categoryUpdate: async (root, {
             contactId,
         }, {
             req,
