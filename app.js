@@ -5,6 +5,9 @@ const {
 const {
     SubscriptionServer
 } = require('subscriptions-transport-ws');
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
 const {
     ApolloServerPluginDrainHttpServer,
     ApolloServerPluginLandingPageLocalDefault,
@@ -35,6 +38,16 @@ const PORT = process.env.PORT || 4000;
 async function startApolloServer(typeDefs, resolvers) {
     // Required logic for integrating with Express
     const app = express();
+
+    app.use(cors({
+        origin: true,
+        credentials: true
+    }));
+
+    app.use(bodyParser.json());
+
+    app.use(cookieParser());
+
     const httpServer = createServer(app);
 
     // Same ApolloServer initialization as before, plus the drain plugin.
