@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "apollo-server-core": "^3.3.0",
-    "apollo-server-express": "^2.25.2",
+    "apollo-server-express": "^3.3.0",
     "body-parser": "^1.19.0",
     "concurrently": "^6.3.0",
     "cookie-parser": "^1.4.5",
@@ -33,6 +33,7 @@
     "easygraphql-format-error": "0.0.3",
     "express": "^4.17.1",
     "graphql": "^15.6.1",
+    "graphql-subscriptions": "^1.2.1",
     "graphql-tools": "^8.2.0",
     "http": "0.0.1-security",
     "jsonwebtoken": "^8.5.1",
