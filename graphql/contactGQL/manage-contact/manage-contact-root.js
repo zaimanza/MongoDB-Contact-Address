@@ -1,4 +1,8 @@
 const {
+    merge,
+} = require('lodash');
+
+const {
     contactAddSchema,
     contactAddResolver,
 } = require("./contact-add");
@@ -20,8 +24,4 @@ ${contactDeleteSchema}
 
 `;
 
-exports.manageContactResolver = {
-    ...contactAddResolver,
-    ...contactUpdateResolver,
-    ...contactDeleteResolver,
-};
+exports.manageContactResolver = merge({}, contactAddResolver, contactUpdateResolver, contactDeleteResolver);

@@ -3,6 +3,10 @@ const {
 } = require('apollo-server-express');
 
 const {
+    merge,
+} = require('lodash');
+
+const {
     pubsub,
     withFilter,
 } = require('../middleware/pubsubs');
@@ -34,11 +38,13 @@ type Mutation {
  ${contactSchema}
 `;
 
-const resolvers = {
-    ...userResolver,
-    ...contactResolver,
+// const resolvers = {
+//     ...userResolver,
+//     ...contactResolver,
 
-};
+// };
+const resolvers = merge({}, userResolver, contactResolver);
+
 const schema = makeExecutableSchema({
     typeDefs,
     resolvers

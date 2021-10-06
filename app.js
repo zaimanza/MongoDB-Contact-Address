@@ -34,7 +34,7 @@ const rootAuth = require("./middleware/rootAuth");
 
 const errorName = formatError.errorName;
 
-const PORT = process.env.PORT || 4001;
+const PORT = process.env.PORT || 4000;
 
 async function startApolloServer(typeDefs, resolvers) {
     // Required logic for integrating with Express
