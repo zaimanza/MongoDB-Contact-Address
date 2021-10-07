@@ -40,7 +40,6 @@ exports.categoryDeleteResolver = {
                         categories: {
                             _id: categoryId,
                         },
-                        // "categories.$._id": categoryId,
                     },
                 }, {
                     upsert: true,
