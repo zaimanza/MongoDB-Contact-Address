@@ -1,22 +1,19 @@
-const { createAccessToken } = require("../../../middleware/createToken");
+const {
+    createAccessToken
+} = require("../../../middleware/createToken");
 const User = require("../../../models/user");
 const contactModel = require("../../../merge/contactMerge/contactModel");
 
 
 exports.loginOrAddSchema = `
 
-type category_result {
-    _id: String,
-    contacts: [String!],
-}
-
 type loginOrAdd_result {
     _id: String!,
     username: String!,
-    # contacts:[contact_result!],
+    contacts:[contact_result!],
     categories:[category_result!],
     recentSearch:[String!],
-    accessToken: String!,
+    accessToken: String,
 }
 
 extend type Query {

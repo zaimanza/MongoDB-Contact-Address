@@ -1,16 +1,25 @@
+const User = require("../../../models/user");
+const contactModel = require("../../../merge/contactMerge/contactModel");
+
 exports.categoryAddSchema = `
+
+type category_result {
+    _id: String,
+    name: String,
+    contacts: [String!],
+}
 
 extend type Mutation {
     categoryAdd(
-        contactId: ID!,
-    ): contact_result
+        name: String!,
+    ): loginOrAdd_result
 }
 `;
 
 exports.categoryAddResolver = {
     Mutation: {
         categoryAdd: async (root, {
-            contactId,
+            name,
         }, {
             req,
             errorName
@@ -20,7 +29,38 @@ exports.categoryAddResolver = {
                     throw new Error(errorName.UNAUTHORIZED);
                 }
 
-                return true;
+                const fetchUser = await User.exists({
+                    _id: req.userId,
+                });
+
+                if (!fetchUser) {
+                    throw new Error(errorName.UNAUTHORIZED);
+                }
+
+                const newCategory = {
+                    name: name,
+                }
+
+                const updatedUser = await User.findOneAndUpdate({
+                    _id: req.userId,
+                }, {
+                    $push: {
+                        categories: newCategory,
+                    },
+                }, {
+                    upsert: true,
+                    new: true,
+                });
+
+
+
+
+
+                return {
+                    ...updatedUser._doc,
+                    _id: updatedUser.id,
+                    contacts: contactModel.contacts.bind(this, updatedUser._doc.contacts),
+                };
 
             } catch (err) {
                 throw err;

@@ -4,3 +4,4 @@ const transformContact = (contact) => {
         _id: contact.id,
     };
 };
+exports.transformContact = transformContact;
