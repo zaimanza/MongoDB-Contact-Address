@@ -1,16 +1,19 @@
+const User = require("../../../models/user");
+const contactModel = require("../../../merge/contactMerge/contactModel");
+
 exports.categoryDeleteSchema = `
 
 extend type Mutation {
     categoryDelete(
-        contactId: ID!,
-    ): contact_result
+        categoryId: ID!,
+    ): loginOrAdd_result
 }
 `;
 
 exports.categoryDeleteResolver = {
     Mutation: {
         categoryDelete: async (root, {
-            contactId,
+            categoryId,
         }, {
             req,
             errorName
@@ -20,7 +23,34 @@ exports.categoryDeleteResolver = {
                     throw new Error(errorName.UNAUTHORIZED);
                 }
 
-                return true;
+                const fetchUser = await User.exists({
+                    _id: req.userId,
+                });
+
+                if (!fetchUser) {
+                    throw new Error(errorName.UNAUTHORIZED);
+                }
+
+                const updatedUser = await User.findOneAndUpdate({
+                    _id: req.userId,
+                    "categories._id": categoryId,
+                }, {
+                    $pull: {
+                        categories: {
+                            _id: categoryId,
+                        },
+                        // "categories.$._id": categoryId,
+                    },
+                }, {
+                    upsert: true,
+                    new: true,
+                });
+
+                return {
+                    ...updatedUser._doc,
+                    _id: updatedUser.id,
+                    contacts: contactModel.contacts.bind(this, updatedUser._doc.contacts),
+                };
 
             } catch (err) {
                 throw err;
