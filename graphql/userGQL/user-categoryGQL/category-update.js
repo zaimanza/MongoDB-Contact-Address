@@ -27,6 +27,7 @@ exports.categoryUpdateResolver = {
 
                 const fetchUser = await User.exists({
                     _id: req.userId,
+                    "categories._id": categoryId,
                 });
 
                 if (!fetchUser) {
