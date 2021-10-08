@@ -1,4 +1,8 @@
 const {
+    merge,
+} = require('lodash');
+
+const {
     loginOrAddSchema,
     loginOrAddResolver,
 } = require("./loginOrAdd");
@@ -14,7 +18,7 @@ ${viewAllSchema}
 
 `;
 
-exports.manageUserProfileResolver = {
-    ...loginOrAddResolver,
-    ...viewAllResolver,
-};
+exports.manageUserProfileResolver = merge({},
+    loginOrAddResolver,
+    viewAllResolver,
+);
