@@ -13,6 +13,17 @@ const category = new mongoose.Schema({
     }],
 });
 
+const recentSearch = new mongoose.Schema({
+    searchWord: {
+        type: String,
+        required: true
+    },
+    searchDate: {
+        type: Date,
+        default: Date.now
+    },
+});
+
 const modelDesign = new mongoose.Schema({
     username: {
         type: String,
@@ -27,7 +38,8 @@ const modelDesign = new mongoose.Schema({
         default: () => ({}),
     }],
     recentSearch: [{
-        type: String,
+        type: recentSearch,
+        default: () => ({}),
     }],
 });
 
