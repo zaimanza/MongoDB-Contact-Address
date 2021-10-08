@@ -1,18 +1,18 @@
 const Contact = require("../../../models/contact");
 const User = require("../../../models/user");
 
-exports.recentSearchAddSchema = `
+exports.searchKeywordSchema = `
 
 extend type Mutation {
-    recentSearchAdd(
+    searchKeyword(
         searchWord: String!,
     ): Boolean
 }
 `;
 
-exports.recentSearchAddResolver = {
+exports.searchKeywordResolver = {
     Mutation: {
-        recentSearchAdd: async (root, {
+        searchKeyword: async (root, {
             searchWord,
         }, {
             req,
@@ -69,6 +69,8 @@ exports.recentSearchAddResolver = {
                     upsert: true,
                     new: true,
                 });
+
+                // akan return list of contact yg dia search
 
                 return true;
 

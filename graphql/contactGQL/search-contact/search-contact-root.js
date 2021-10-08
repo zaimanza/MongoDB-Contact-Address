@@ -3,15 +3,22 @@ const {
 } = require('lodash');
 
 const {
-    recentSearchAddSchema,
-    recentSearchAddResolver,
-} = require("./recent-search-add");
+    searchKeywordSchema,
+    searchKeywordResolver,
+} = require("./search-keyword");
+
+const {
+    searchSuggestSchema,
+    searchSuggestResolver,
+} = require("./search-suggest");
 
 exports.searchContactSchema = `
-${recentSearchAddSchema}
+${searchKeywordSchema}
+${searchSuggestSchema}
 
 `;
 
 exports.searchContactResolver = merge({},
-    recentSearchAddResolver,
+    searchKeywordResolver,
+    searchSuggestResolver,
 );

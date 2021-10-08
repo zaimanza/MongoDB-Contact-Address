@@ -7,12 +7,18 @@ const contactModel = require("../../../merge/contactMerge/contactModel");
 
 exports.loginOrAddSchema = `
 
+type recentSearch_result {
+    _id: String,
+    searchWord: String!,
+    searchDate: String,
+}
+
 type loginOrAdd_result {
-    _id: String!,
+    _id: String,
     username: String!,
     contacts:[contact_result!],
     categories:[category_result!],
-    recentSearch:[String!],
+    recentSearch:[recentSearch_result!],
     accessToken: String,
 }
 
