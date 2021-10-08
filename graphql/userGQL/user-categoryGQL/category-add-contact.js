@@ -1,19 +1,19 @@
 const User = require("../../../models/user");
 const contactModel = require("../../../merge/contactMerge/contactModel");
 
-exports.categoryAddUserSchema = `
+exports.categoryAddContactSchema = `
 
 extend type Mutation {
-    categoryAddUser(
+    categoryAddContact(
         categoryId: ID!,
         contactId: ID!,
     ): loginOrAdd_result
 }
 `;
 
-exports.categoryAddUserResolver = {
+exports.categoryAddContactResolver = {
     Mutation: {
-        categoryAddUser: async (root, {
+        categoryAddContact: async (root, {
             categoryId,
             contactId,
         }, {

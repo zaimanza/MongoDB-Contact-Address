@@ -18,21 +18,21 @@ const {
 } = require("./category-update");
 
 const {
-    categoryAddUserSchema,
-    categoryAddUserResolver,
-} = require("./category-add-user");
+    categoryAddContactSchema,
+    categoryAddContactResolver,
+} = require("./category-add-contact");
 
 const {
-    categoryRemoveUserSchema,
-    categoryRemoveUserResolver,
-} = require("./category-remove-user");
+    categoryRemoveContactSchema,
+    categoryRemoveContactResolver,
+} = require("./category-remove-contact");
 
 exports.userCategorySchema = `
 ${categoryAddSchema}
 ${categoryDeleteSchema}
 ${categoryUpdateSchema}
-${categoryAddUserSchema}
-${categoryRemoveUserSchema}
+${categoryAddContactSchema}
+${categoryRemoveContactSchema}
 
 `;
 
@@ -40,6 +40,6 @@ exports.userCategoryResolver = merge({},
     categoryAddResolver,
     categoryDeleteResolver,
     categoryUpdateResolver,
-    categoryAddUserResolver,
-    categoryRemoveUserResolver,
+    categoryAddContactResolver,
+    categoryRemoveContactResolver,
 );

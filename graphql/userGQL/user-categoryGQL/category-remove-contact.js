@@ -1,19 +1,19 @@
 const User = require("../../../models/user");
 const contactModel = require("../../../merge/contactMerge/contactModel");
 
-exports.categoryRemoveUserSchema = `
+exports.categoryRemoveContactSchema = `
 
 extend type Mutation {
-    categoryRemoveUser(
+    categoryRemoveContact(
         categoryId: ID!,
         contactId: ID!,
     ): loginOrAdd_result
 }
 `;
 
-exports.categoryRemoveUserResolver = {
+exports.categoryRemoveContactResolver = {
     Mutation: {
-        categoryRemoveUser: async (root, {
+        categoryRemoveContact: async (root, {
             categoryId,
             contactId,
         }, {
