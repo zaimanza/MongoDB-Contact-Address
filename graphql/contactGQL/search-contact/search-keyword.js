@@ -1,12 +1,13 @@
 const Contact = require("../../../models/contact");
 const User = require("../../../models/user");
+const contactModel = require("../../../merge/contactMerge/contactModel");
 
 exports.searchKeywordSchema = `
 
 extend type Mutation {
     searchKeyword(
         searchWord: String!,
-    ): Boolean
+    ): loginOrAdd_result
 }
 `;
 
@@ -26,8 +27,9 @@ exports.searchKeywordResolver = {
                 const fetchUser = await User.findOne({
                     _id: req.userId,
                 }, {
-                    _id: 0,
+                    _id: 1,
                     recentSearch: 1,
+                    contacts: 1,
                 });
 
                 if (!fetchUser) {
@@ -72,7 +74,27 @@ exports.searchKeywordResolver = {
 
                 // akan return list of contact yg dia search
 
-                return true;
+                var fetchContactIds = [];
+                var tempIds = [];
+
+                if (fetchUser.contacts.length > 0) {
+                    fetchContact = await Contact.find({
+                        _id: fetchUser.contacts,
+                        name: {
+                            $regex: searchWord,
+                            $options: "i",
+                        },
+                    });
+                    fetchContact.map((fetchCont) => {
+                        tempIds.push(fetchCont._id);
+                    });
+                }
+
+                return {
+                    ...fetchUser._doc,
+                    _id: fetchUser.id,
+                    contacts: contactModel.contactsSortFavNormal.bind(this, tempIds),
+                };
 
             } catch (err) {
                 throw err;

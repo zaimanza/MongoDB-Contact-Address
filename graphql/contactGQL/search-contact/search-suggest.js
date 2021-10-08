@@ -33,6 +33,8 @@ exports.searchSuggestResolver = {
                 }
 
                 var fetchContactIds = [];
+                var tempIds = [];
+
                 if (fetchUser.contacts.length > 0) {
                     fetchContact = await Contact.find({
                         _id: fetchUser.contacts,
@@ -41,12 +43,9 @@ exports.searchSuggestResolver = {
                             $options: "i",
                         },
                     });
-                    var tempIds = [];
                     fetchContact.map((fetchCont) => {
                         tempIds.push(fetchCont._id);
                     });
-
-                    console.log(tempIds);
                 }
 
                 return {
