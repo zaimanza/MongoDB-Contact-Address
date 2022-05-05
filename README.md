@@ -1,11 +1,7 @@
 # MongoDB-Contact-Address
 
-.env
-MONGO_USER = aiman
-MONGO_PASSWORD = SumAqVM3TutkDAA3
-MONGO_URL = cluster0.pkfhk.gcp.mongodb.net
-MONGO_DB = contact
-AUTH_KEY = someSuperScretKey
+A mongoDB exercise to create a contract address API for a user to use.
 
-    MAIL_USER=hirodeli@outlook.com
-    MAIL_PASSWORD=bship@lphar23K
+![image](https://user-images.githubusercontent.com/36519974/166895438-2f39ae4d-3d34-49d6-9e84-501e8f2dedaf.png)
+
+![image](https://user-images.githubusercontent.com/36519974/166895459-70d59d2c-9161-41e7-81c9-499da5cc9560.png)
